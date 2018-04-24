@@ -329,10 +329,8 @@ const ScrollableTabView = createReactClass({
   _handleLayout(e) {
     const { width, } = e.nativeEvent.layout;
 
-    if (width > 0 && Math.round(width) !== Math.round(this.state.containerWidth)) {
-      return;
-    }
     
+    if (width > 0 && Math.round(width) !== Math.round(this.state.containerWidth)) {
     if (Platform.OS === 'ios') {
       const containerWidthAnimatedValue = new Animated.Value(width);
       // Need to call __makeNative manually to avoid a native animated bug. See
@@ -346,6 +344,7 @@ const ScrollableTabView = createReactClass({
     this.requestAnimationFrame(() => {
       this.goToPage(this.state.currentPage);
     });
+    }
   },
 
   _children(children = this.props.children) {
