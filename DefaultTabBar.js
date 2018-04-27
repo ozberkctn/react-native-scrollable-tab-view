@@ -7,6 +7,7 @@ const {
   Text,
   View,
   Animated,
+  Platform
 } = ReactNative;
 const Button = require('./Button');
 
@@ -39,6 +40,7 @@ const DefaultTabBar = createReactClass({
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
+    fontWeight = Platform.OS === "android" ? 'normal' : fontWeight;
 
     return <Button
       style={{flex: 1, }}
