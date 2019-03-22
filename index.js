@@ -138,7 +138,7 @@ const ScrollableTabView = createReactClass({
   goToPage(pageNumber) {
     if (Platform.OS === "ios") {
       let offset = pageNumber * this.state.containerWidth;
-      if (I18nManager.isRTL) offset = offset * -1;
+
       debugger;
       if (this.scrollView) {
         this.scrollView.getNode().scrollTo({
@@ -272,6 +272,13 @@ const ScrollableTabView = createReactClass({
           directionalLockEnabled
           alwaysBounceVertical={false}
           keyboardDismissMode="on-drag"
+          style={{
+            transform: [
+              {
+                scaleX: I18nManager.isRTL && Platform.OS == "android" ? -1 : 1
+              }
+            ]
+          }}
           {...this.props.contentProps}
         >
           {scenes}
