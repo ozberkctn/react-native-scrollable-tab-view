@@ -76,7 +76,14 @@ const DefaultTabBar = createReactClass({
       <View
         style={[
           styles.tabs,
-          { backgroundColor: this.props.backgroundColor },
+          {
+            backgroundColor: this.props.backgroundColor,
+            transform: [
+              {
+                scaleX: I18nManager.isRTL ? -1 : 1
+              }
+            ]
+          },
           this.props.style
         ]}
       >
