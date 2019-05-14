@@ -1,5 +1,9 @@
 const React = require("react");
-const { ViewPropTypes, I18nManager } = (ReactNative = require("react-native"));
+const {
+  ViewPropTypes,
+  I18nManager,
+  Platform
+} = (ReactNative = require("react-native"));
 const PropTypes = require("prop-types");
 const createReactClass = require("create-react-class");
 const { StyleSheet, Text, View, Animated } = ReactNative;
@@ -44,7 +48,21 @@ const DefaultTabBar = createReactClass({
         onPress={() => onPressHandler(page)}
       >
         <View style={[styles.tab, this.props.tabStyle]}>
-          <Text style={[{ color: textColor, fontWeight }, textStyle]}>
+          <Text
+            style={[
+              {
+                color: textColor,
+                fontWeight,
+                transform: [
+                  {
+                    scaleX:
+                      Platform.OS == "android" && I18nManager.isRTL ? -1 : 1
+                  }
+                ]
+              },
+              textStyle
+            ]}
+          >
             {name}
           </Text>
         </View>
@@ -80,7 +98,7 @@ const DefaultTabBar = createReactClass({
             backgroundColor: this.props.backgroundColor,
             transform: [
               {
-                scaleX: I18nManager.isRTL ? -1 : 1
+                scaleX: Platform.OS == "android" && I18nManager.isRTL ? -1 : 1
               }
             ]
           },
@@ -96,7 +114,12 @@ const DefaultTabBar = createReactClass({
           style={[
             tabUnderlineStyle,
             {
-              transform: [{ translateX }]
+              transform: [
+                { translateX },
+                {
+                  scaleX: Platform.OS == "ios" && I18nManager.isRTL ? -1 : 1
+                }
+              ]
             },
             this.props.underlineStyle
           ]}
