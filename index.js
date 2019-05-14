@@ -275,7 +275,7 @@ const ScrollableTabView = createReactClass({
           style={{
             transform: [
               {
-                scaleX: I18nManager.isRTL && Platform.OS == "android" ? -1 : 1
+                scaleX: I18nManager.isRTL ? -1 : 1
               }
             ]
           }}
@@ -289,16 +289,7 @@ const ScrollableTabView = createReactClass({
       return (
         <AnimatedViewPagerAndroid
           key={this._children().length}
-          style={[
-            styles.scrollableContentAndroid,
-            {
-              transform: [
-                {
-                  scaleX: I18nManager.isRTL && Platform.OS == "android" ? -1 : 1
-                }
-              ]
-            }
-          ]}
+          style={styles.scrollableContentAndroid}
           initialPage={this.props.initialPage}
           onPageSelected={this._updateSelectedPage}
           keyboardDismissMode="on-drag"
