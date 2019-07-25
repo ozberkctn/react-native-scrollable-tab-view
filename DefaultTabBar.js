@@ -8,7 +8,6 @@ const PropTypes = require("prop-types");
 const createReactClass = require("create-react-class");
 const { StyleSheet, Text, View, Animated } = ReactNative;
 const Button = require("./Button");
-import { ButtonPrimaryCenter, SubtitleLowEmphasisCenter } from "../../components/Typography";
 
 const DefaultTabBar = createReactClass({
   propTypes: {
@@ -35,10 +34,10 @@ const DefaultTabBar = createReactClass({
   renderTabOption(name, page) {},
 
   renderTab(name, page, isTabActive, onPressHandler) {
-    const { activeTextColor, inactiveTextColor, textStyle } = this.props;
+    const { activeTextColor, inactiveTextColor, textStyle,activeTextStyle } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? "bold" : "normal";
-
+debugger;
     return (
       <Button
         style={{ flex: 1 }}
@@ -49,14 +48,23 @@ const DefaultTabBar = createReactClass({
         onPress={() => onPressHandler(page)}
       >
         <View style={[styles.tab, this.props.tabStyle]}>
-          {isTabActive ?  
-            <ButtonPrimaryCenter>
-              {name}
-            </ButtonPrimaryCenter>: 
-            <SubtitleLowEmphasisCenter>
-              {name}
-            </SubtitleLowEmphasisCenter>
-          }
+          <Text
+            style={[
+              {
+                color: textColor,
+                fontWeight,
+                transform: [
+                  {
+                    scaleX:
+                      Platform.OS == "android" && I18nManager.isRTL ? -1 : 1
+                  }
+                ]
+              },
+              isTabActive ? activeTextStyle : textStyle
+            ]}
+          >
+            {name}
+          </Text>
         </View>
       </Button>
     );
