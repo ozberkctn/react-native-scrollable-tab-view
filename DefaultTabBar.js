@@ -8,6 +8,7 @@ const PropTypes = require("prop-types");
 const createReactClass = require("create-react-class");
 const { StyleSheet, Text, View, Animated } = ReactNative;
 const Button = require("./Button");
+import { ButtonPrimaryCenter, SubtitleLowEmphasisCenter } from "../../components/Typography";
 
 const DefaultTabBar = createReactClass({
   propTypes: {
@@ -48,23 +49,14 @@ const DefaultTabBar = createReactClass({
         onPress={() => onPressHandler(page)}
       >
         <View style={[styles.tab, this.props.tabStyle]}>
-          <Text
-            style={[
-              {
-                color: textColor,
-                fontWeight,
-                transform: [
-                  {
-                    scaleX:
-                      Platform.OS == "android" && I18nManager.isRTL ? -1 : 1
-                  }
-                ]
-              },
-              textStyle
-            ]}
-          >
-            {name}
-          </Text>
+          {isTabActive ?  
+            <ButtonPrimaryCenter>
+              {name}
+            </ButtonPrimaryCenter>: 
+            <SubtitleLowEmphasisCenter>
+              {name}
+            </SubtitleLowEmphasisCenter>
+          }
         </View>
       </Button>
     );
