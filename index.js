@@ -18,7 +18,7 @@ const SceneComponent = require("./SceneComponent");
 const DefaultTabBar = require("./DefaultTabBar");
 const ScrollableTabBar = require("./ScrollableTabBar");
 
-import ViewPager from '@react-native-community/viewpager';
+import ViewPagerAndroid from '@react-native-community/viewpager';
 
 
 const AnimatedViewPagerAndroid =
